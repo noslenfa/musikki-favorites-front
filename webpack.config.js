@@ -14,13 +14,14 @@ var config = {
         loaders: [
             {
                 test: /\.js$/,
-                include: SRC_DIR,
                 loaders: ['react-hot-loader/webpack','babel'],
+                include: SRC_DIR,
                 exclude: /node_modules/
             },
             {
-                test: /\.scss$/,
-                loaders: ['style', 'css', 'sass']
+                test: /\.s?css$/,
+                loaders: ['style', 'css', 'sass'],
+                include: SRC_DIR
             }
         ]
     }
