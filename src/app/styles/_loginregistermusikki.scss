@@ -1,0 +1,38 @@
+.login-area {
+  max-width: 500px;
+  margin-top: 5%;
+  background-color: $musikki-grey;
+  border-radius: 5px;
+  form {
+    margin: 25px;
+    div {
+      label {
+        font-size: 18px;
+      }
+      button {
+        min-width: 150px;
+      }
+    }
+  }
+}
+
+video, .overlay-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+video {
+    z-index: -100;
+}
+
+.overlay-video {
+  z-index: -99;
+  background-color: black;
+  opacity: 0.75;
+}
