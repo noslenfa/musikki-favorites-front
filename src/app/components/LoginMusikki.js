@@ -4,14 +4,14 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import FormControlFeedback from 'react-bootstrap/lib/FormControlFeedback';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Button from 'react-bootstrap/lib/Button';
 import VideoMusikki from './VideoMusikki';
 
 class LoginMusikki extends Component {
-  constructor(props){
+  constructor(props, context){
 		super(props);
     this.state = {usernameLValue: '', passwordLValue: ''};
+    context.router;
 	}
 
   handleChangeLUsername(e) {
@@ -43,6 +43,8 @@ class LoginMusikki extends Component {
         if(userPass === this.state.passwordLValue) {
           //TODO: implement logic to next steps
           console.log("authentication correct!!");
+          localStorage.setItem('loggedIn', JSON.stringify(true));
+          this.context.router.replace('search');
         } else {
           //TODO: add information about user wrong authentication
           console.log("authentication incorrect!!");
@@ -95,6 +97,10 @@ class LoginMusikki extends Component {
 
     );
   }
+}
+
+LoginMusikki.contextTypes = {
+	router: React.PropTypes.object
 }
 
 export default LoginMusikki;

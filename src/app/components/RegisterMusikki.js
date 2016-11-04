@@ -4,7 +4,6 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import FormControlFeedback from 'react-bootstrap/lib/FormControlFeedback';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Button from 'react-bootstrap/lib/Button';
 import VideoMusikki from './VideoMusikki';
 

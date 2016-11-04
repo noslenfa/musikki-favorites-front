@@ -9,6 +9,7 @@ import IndexRoute from "react-router/lib/IndexRoute";
 import App from './components/App';
 import LoginMusikki from './components/LoginMusikki';
 import RegisterMusikki from './components/RegisterMusikki';
+import SearchMusikki from './components/SearchMusikki';
 import CarouselMusikki from './components/CarouselMusikki';
 
 import AppContainer from 'react-hot-loader/lib/AppContainer';
@@ -27,6 +28,7 @@ ReactDOM.render(
         <IndexRoute component={CarouselMusikki} />
         <Route path={"login"} component={LoginMusikki} />
         <Route path={"register"} component={RegisterMusikki} />
+        <Route path={"search"} component={SearchMusikki} />
       </Route>
     </Router>
   </AppContainer>,
