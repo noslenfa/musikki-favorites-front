@@ -12,7 +12,6 @@ import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 class NavBarMusikki extends Component {
   constructor(props){
 		super(props);
-    this.state = {loggedIn: false};
 	}
 
   render() {
@@ -27,7 +26,7 @@ class NavBarMusikki extends Component {
             <NavbarToggle />
           </NavbarHeader>
           <NavbarCollapse>
-            {!this.state.loggedIn ?
+            {!this.props.loggedIn ?
             <Nav pullRight>
               <LinkContainer to="register">
                 <NavItem>REGISTER</NavItem>
@@ -37,6 +36,7 @@ class NavBarMusikki extends Component {
               </LinkContainer>
             </Nav> :
             <Nav pullRight>
+              <NavItem>Welcome {this.props.username}</NavItem>
               <LinkContainer to="/">
                 <NavItem>LOGOUT</NavItem>
               </LinkContainer>

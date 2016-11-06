@@ -5,9 +5,25 @@ import RestService from './RestService'
 
 class ResultsService{
 
-	getArtistsInfo(artistName, pageNumber, cb, cberror){
+
+//get all artists info based on input inserted
+	getAllSearchedArtistsInfo(artistName, pageNumber, cb, cberror){
 
 		let url = API_REST_URL + '/v1/artists?q=[artist-name:' + artistName + ']&appkey=' + API_KEY + '&appid=' + API_ID + '&limit=10&page=' + pageNumber;
+    console.log('URL: ', url);
+
+		RestService.get(url).then((response) => {
+      cb(JSON.parse(response));
+		}, (err) => {
+			cberror(err);
+		});
+	}
+
+
+//get artist info based on artist mkid
+	getArtistsInfo(mkid, cb, cberror){
+
+		let url = API_REST_URL + '/v1/artists/' + mkid + '/?appkey=' + API_KEY + '&appid=' + API_ID;
     console.log('URL: ', url);
 
 		RestService.get(url).then((response) => {

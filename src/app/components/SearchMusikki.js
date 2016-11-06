@@ -13,14 +13,46 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import Button from 'react-bootstrap/lib/Button';
 import Pagination from 'react-bootstrap/lib/Pagination';
 import ResultsService from '../services/ResultsService'
-import {test} from '../services/ResultsService'
+import NavBarMusikki from './NavBarMusikki'
+import TabsSearchFavoritesMusikki from './search/TabsSearchFavoritesMusikki'
+import ListArtistsAndFavorites from './search/ListArtistsAndFavorites'
+import SearchFormMusikki from './search/SearchFormMusikki'
 
 class SearchMusikki extends Component {
   constructor(props){
 		super(props);
     this.resultsService = new ResultsService();
-    this.state = {artistName: '', results: [], summary: [], searchOcurred: false};
+    this.state = {artistName: '', results: [], summary: [], searchOcurred: false, authenticatedUser: '', favoritesList: [], allUsers: []};
 	}
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.allUsers != this.state.allUsers) {
+      console.log("alterou lista favoritos");
+    }
+  }
+
+  componentWillMount() {
+
+    console.log("wilmount searcg");
+
+    this.state.allUsers = JSON.parse(localStorage.getItem("users"));
+    this.state.authenticatedUser = JSON.parse(localStorage.getItem("authenticatedUser"));
+    let allFav = _.find(this.state.allUsers, {'username': this.state.authenticatedUser}).favorites;
+    let favList = [];
+    for (let i = 0; i < allFav.length; i++) {
+      let mkid = allFav[i];
+      this.resultsService.getArtistsInfo(mkid,
+        (response) => {
+          favList.push({mkid: response.result.mkid, name: response.result.name, image: response.result.image, type: response.result.type});
+          this.setState({ favoritesList: favList});
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
+    console.log(this.state.favoritesList);
+  }
 
   handleChangeArtist(e) {
     this.setState({ artistName: e.target.value });
@@ -31,7 +63,7 @@ class SearchMusikki extends Component {
       this.state.activePage = 1;
     }
     this.state.searchOcurred = true;
-    this.resultsService.getArtistsInfo(this.state.artistName, this.state.activePage,
+    this.resultsService.getAllSearchedArtistsInfo(this.state.artistName, this.state.activePage,
       (response) => {
         this.setState({ results: response.results });
         this.setState({ summary: response.summary });
@@ -44,56 +76,51 @@ class SearchMusikki extends Component {
     );
   }
 
+  handleKeyPress(target) {
+    if(target.charCode==13){
+      this.searchArtist();
+    }
+  }
+
   handleSelect(number) {
       this.state.activePage = number;
       this.searchArtist();
   }
 
+  selectFav(item) {
+    if (_.includes(_.find(this.state.allUsers, {'username': this.state.authenticatedUser}).favorites, item)) {
+      _.pull(_.find(this.state.allUsers, {'username': this.state.authenticatedUser}).favorites, item);
+      this.setState({ allUsers: this.state.allUsers });
+      localStorage.setItem('users', JSON.stringify(this.state.allUsers));
+    } else {
+      _.find(this.state.allUsers, {'username': this.state.authenticatedUser}).favorites.push(item);
+      this.setState({ allUsers: this.state.allUsers });
+      localStorage.setItem('users', JSON.stringify(this.state.allUsers));
+    }
+    console.log(this.state.allUsers);
+  }
+
   render() {
     return (
+      <div><NavBarMusikki loggedIn={true} username={this.state.authenticatedUser}/>
       <div className="container search-area">
         <TabContainer id="left-tabs-example" defaultActiveKey="first">
           <Row className="clearfix">
-            <Col xs={12}>
-              <Nav bsStyle="pills">
-                <NavItem className="search-search-favorites" eventKey="first">
-                  SEARCH
-                </NavItem>
-                <NavItem className="search-search-favorites" eventKey="second">
-                  FAVORITES
-                </NavItem>
-              </Nav>
-            </Col>
+            <TabsSearchFavoritesMusikki />
             <Col xs={12}>
               <TabContent animation>
                 <TabPane eventKey="first">
-                  <Row className="clearfix">
-                    <Col className="search-input-main" xs={8}>
-                    <FormGroup className="search-input">
-                      <FormControl
-                      type="text"
-                      value={this.state.artistName}
-                      placeholder="Search"
-                      onChange={this.handleChangeArtist.bind(this)}
-                       />
-                    </FormGroup>
-                  </Col>
-                  <Col className="search-artist-btn" xs={4}>
-                    <Button bsStyle="primary" onClick={() => this.searchArtist()}>SEARCH ARTISTS<div className="icon fa fa-search"></div></Button>
-                  </Col>
-                  </Row>
+                  <SearchFormMusikki
+                    artistN = {this.state.artistName}
+                    changeArtist = {this.handleChangeArtist.bind(this)}
+                    searchArtist = {this.searchArtist.bind(this)}
+                    />
                   <hr />
                    {this.state.results.map((item) =>
-                    <div key={item.mkid} className="search-display-info">
-                      <Col xs={2}>
-                        <img src={item.image} />
-                      </Col>
-                      <Col className="search-display-info-text" xs={8}>
-                        <div><span>NAME: </span>{item.name}</div>
-                        <div><span>TYPE: </span>{item.type}</div>
-                        </Col>
-                      <Col xs={2}><div className="icon fa fa-star search-favorite search-favorite-empty"></div></Col>
-                    </div>)}
+                     <ListArtistsAndFavorites
+                       key={item.mkid}
+                       favorite={item}
+                       selectFavorite={this.selectFav.bind(this)} />)}
                     {this.state.searchOcurred ?
                     <div className="search-pagination">
                       <Pagination
@@ -111,13 +138,17 @@ class SearchMusikki extends Component {
                     <div></div>}
                 </TabPane>
                 <TabPane eventKey="second">
-                  FAVORITES
+                  {this.state.favoritesList.map((item) =>
+                   <ListArtistsAndFavorites
+                     key={item.mkid}
+                     favorite={item}
+                     selectFavorite={this.selectFav.bind(this)} />)}
                   </TabPane>
               </TabContent>
             </Col>
           </Row>
         </TabContainer>
-
+      </div>
       </div>
     );
   }

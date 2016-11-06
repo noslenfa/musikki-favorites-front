@@ -92,6 +92,10 @@
 .search-favorite {
   font-size: 60px;
   padding: 15px 35px;
+  &:hover {
+    cursor: pointer;
+    color: darken($favorite-empty, 25%);
+  }
 }
 
 .search-favorite-empty {

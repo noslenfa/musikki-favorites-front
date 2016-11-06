@@ -5,6 +5,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import FormControlFeedback from 'react-bootstrap/lib/FormControlFeedback';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Button from 'react-bootstrap/lib/Button';
+import NavBarMusikki from './NavBarMusikki';
 import VideoMusikki from './VideoMusikki';
 
 class LoginMusikki extends Component {
@@ -43,6 +44,7 @@ class LoginMusikki extends Component {
         if(userPass === this.state.passwordLValue) {
           //TODO: implement logic to next steps
           console.log("authentication correct!!");
+          localStorage.setItem('authenticatedUser', JSON.stringify(this.state.usernameLValue));
           localStorage.setItem('loggedIn', JSON.stringify(true));
           this.context.router.replace('search');
         } else {
@@ -59,25 +61,33 @@ class LoginMusikki extends Component {
     }
   }
 
+  handleKeyPress(target) {
+    if(target.charCode==13){
+      this.loginUser();
+    }
+  }
+
   render() {
     const videoURLLogin = '../app/videos/video_01_720p.mp4';
     return (
+      <div>
+        <NavBarMusikki />
         <div className="container login-area">
           <div className="overlay-video"></div>
           <VideoMusikki videoURL={videoURLLogin}/>
-        <form>
-              <FormGroup
-                controlId="login-username"
-                className="text-center">
-                <ControlLabel >Username</ControlLabel>
-                <FormControl
-                  type="text"
-                  value={this.state.usernameLValue}
-                  placeholder="Username"
-                  onChange={this.handleChangeLUsername.bind(this)}
-                  />
-              </FormGroup>
-              <FormGroup
+          <form>
+            <FormGroup
+              controlId="login-username"
+              className="text-center">
+              <ControlLabel >Username</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.state.usernameLValue}
+                placeholder="Username"
+                onChange={this.handleChangeLUsername.bind(this)}
+                />
+            </FormGroup>
+            <FormGroup
                 controlId="login-password"
                 className="text-center"
                 >
@@ -87,15 +97,16 @@ class LoginMusikki extends Component {
                   value={this.state.passwordLValue}
                   placeholder="Password"
                   onChange={this.handleChangeLPassword.bind(this)}
+                  onKeyPress={this.handleKeyPress.bind(this)}
                   />
-              </FormGroup>
-              <div className="text-center">
-                <Button bsStyle="primary" onClick={this.loginUser.bind(this)}>Login</Button>
-              </div>
-            </form>
-</div>
-
-    );
+            </FormGroup>
+            <div className="text-center">
+              <Button bsStyle="primary" onClick={this.loginUser.bind(this)}>Login</Button>
+            </div>
+          </form>
+        </div>
+      </div>
+  );
   }
 }
 

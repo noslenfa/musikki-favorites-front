@@ -6,11 +6,12 @@ import FormControlFeedback from 'react-bootstrap/lib/FormControlFeedback';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Button from 'react-bootstrap/lib/Button';
 import VideoMusikki from './VideoMusikki';
+import NavBarMusikki from './NavBarMusikki';
 
 class RegisterMusikki extends Component {
   constructor(props){
 		super(props);
-    this.state = {usernameRValue: '', passwordRValue: '', userRList: []};
+    this.state = {usernameRValue: '', passwordRValue: '', favorites: [], userRList: []};
 	}
 
   handleChangeRUsername(e) {
@@ -34,13 +35,13 @@ class RegisterMusikki extends Component {
             return elm.username === username;
           });
           return usersfound.length > 0;
-        }
+      }
 
       if(verifyUsernameExistence(this.state.usernameRValue)){
         //TODO: add information about user existence
         console.log('user already exist!')
       } else {
-        userRListAll.push({username: this.state.usernameRValue, password: this.state.passwordRValue});
+        userRListAll.push({username: this.state.usernameRValue, password: this.state.passwordRValue, favorites: this.state.favorites});
         this.state.usernameRValue = "";
         this.state.passwordRValue = "";
         localStorage.setItem('users', JSON.stringify(userRListAll));
@@ -52,42 +53,49 @@ class RegisterMusikki extends Component {
     }
   }
 
+  handleKeyPress(target) {
+    if(target.charCode==13){
+      this.registerUser();
+    }
+  }
+
   render() {
     const videoURLRegister = '../app/videos/video_02_720p.mp4';
     return (
+      <div>
+        <NavBarMusikki />
         <div className="container login-area">
           <div className="overlay-video"></div>
           <VideoMusikki videoURL={videoURLRegister}/>
-        <form>
-              <FormGroup
-                controlId="login-username"
-                className="text-center">
-                <ControlLabel >Username</ControlLabel>
-                <FormControl
-                  type="text"
-                  value={this.state.usernameRValue}
-                  placeholder="Username"
-                  onChange={this.handleChangeRUsername.bind(this)}
-                  />
-              </FormGroup>
-              <FormGroup
-                controlId="login-password"
-                className="text-center"
-                >
-                <ControlLabel className="text-center">Password</ControlLabel>
-                <FormControl
-                  type="password"
-                  value={this.state.passwordRValue}
-                  placeholder="Password"
-                  onChange={this.handleChangeRPassword.bind(this)}
-                  />
-              </FormGroup>
-              <div className="text-center">
-                <Button bsStyle="success" onClick={this.registerUser.bind(this)}>Register</Button>
-              </div>
-            </form>
-
-</div>
+          <form>
+            <FormGroup
+              controlId="login-username"
+              className="text-center">
+              <ControlLabel>Username</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.state.usernameRValue}
+                placeholder="Username"
+                onChange={this.handleChangeRUsername.bind(this)}
+              />
+            </FormGroup>
+            <FormGroup
+              controlId="login-password"
+              className="text-center">
+              <ControlLabel className="text-center">Password</ControlLabel>
+              <FormControl
+                type="password"
+                value={this.state.passwordRValue}
+                placeholder="Password"
+                onChange={this.handleChangeRPassword.bind(this)}
+                onKeyPress={this.handleKeyPress.bind(this)}/>
+            </FormGroup>
+            <div className="text-center">
+              <Button bsStyle="success" onClick={this.registerUser.bind(this)}>Register</Button>
+            </div>
+          </form>
+        </div>
+      </div>
     );
   }
 }
