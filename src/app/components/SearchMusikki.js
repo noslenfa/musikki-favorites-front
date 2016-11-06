@@ -22,36 +22,30 @@ class SearchMusikki extends Component {
   constructor(props){
 		super(props);
     this.resultsService = new ResultsService();
-    this.state = {artistName: '', results: [], summary: [], searchOcurred: false, authenticatedUser: '', favoritesList: [], allUsers: []};
+    this.state = {
+      artistName: '',
+      results: [],
+      summary: [],
+      searchOcurred: false,
+      authenticatedUser: '',
+      favoritesList: [],
+      allUsers: []
+    };
 	}
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.allUsers != this.state.allUsers) {
-      console.log("alterou lista favoritos");
-    }
-  }
-
   componentWillMount() {
-
-    console.log("wilmount searcg");
+    if(!JSON.parse(localStorage.getItem("loggedIn"))) {
+      this.context.router.replace('login');
+    }
 
     this.state.allUsers = JSON.parse(localStorage.getItem("users"));
     this.state.authenticatedUser = JSON.parse(localStorage.getItem("authenticatedUser"));
-    let allFav = _.find(this.state.allUsers, {'username': this.state.authenticatedUser}).favorites;
-    let favList = [];
+
+    let allFav = this.getUserFavorites(this.state.authenticatedUser);
     for (let i = 0; i < allFav.length; i++) {
       let mkid = allFav[i];
-      this.resultsService.getArtistsInfo(mkid,
-        (response) => {
-          favList.push({mkid: response.result.mkid, name: response.result.name, image: response.result.image, type: response.result.type});
-          this.setState({ favoritesList: favList});
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      this.getInfoArtist(mkid);
     }
-    console.log(this.state.favoritesList);
   }
 
   handleChangeArtist(e) {
@@ -59,16 +53,16 @@ class SearchMusikki extends Component {
   }
 
   searchArtist(){
+    console.log('search');
     if (this.state.activePage === undefined) {
       this.state.activePage = 1;
     }
     this.state.searchOcurred = true;
     this.resultsService.getAllSearchedArtistsInfo(this.state.artistName, this.state.activePage,
       (response) => {
+        console.log(response);
         this.setState({ results: response.results });
         this.setState({ summary: response.summary });
-        console.log('results: ', this.state.results);
-        console.log('summary: ', this.state.summary);
       },
       (err) => {
         console.log(err);
@@ -76,28 +70,62 @@ class SearchMusikki extends Component {
     );
   }
 
-  handleKeyPress(target) {
-    if(target.charCode==13){
-      this.searchArtist();
-    }
-  }
-
   handleSelect(number) {
-      this.state.activePage = number;
+      this.setState({activePage: number});
       this.searchArtist();
   }
 
   selectFav(item) {
-    if (_.includes(_.find(this.state.allUsers, {'username': this.state.authenticatedUser}).favorites, item)) {
-      _.pull(_.find(this.state.allUsers, {'username': this.state.authenticatedUser}).favorites, item);
+    if (_.includes(this.getUserFavorites(this.state.authenticatedUser), item)) {
+
+      _.pull(this.getUserFavorites(this.state.authenticatedUser), item);
+
       this.setState({ allUsers: this.state.allUsers });
+      this.setState({
+        favoritesList: this.state.favoritesList.filter((elm, i) => elm.mkid !== item)
+      });
+
       localStorage.setItem('users', JSON.stringify(this.state.allUsers));
     } else {
-      _.find(this.state.allUsers, {'username': this.state.authenticatedUser}).favorites.push(item);
+      this.getInfoArtist(item);
+      this.getUserFavorites(this.state.authenticatedUser).push(item);
+
       this.setState({ allUsers: this.state.allUsers });
       localStorage.setItem('users', JSON.stringify(this.state.allUsers));
     }
-    console.log(this.state.allUsers);
+  }
+
+  getInfoArtist(mkid){
+    this.resultsService.getArtistsInfo(mkid,
+      (response) => {
+        let element = {
+          mkid: response.result.mkid,
+          name: response.result.name,
+          image: response.result.image,
+          type: response.result.type
+        };
+        // does not modify the state is like create a new one
+        this.setState({ favoritesList: this.state.favoritesList.concat([element])});
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getUser(username){
+    return _.find(this.state.allUsers, {'username': username});
+  }
+
+  getUserFavorites(username){
+    return this.getUser(username).favorites;
+  }
+
+  verifyFavorites(item){
+    const numElm = this.state.favoritesList.filter((elm) =>
+      item.mkid === elm.mkid
+    );
+    return numElm.length > 0;
   }
 
   render() {
@@ -116,11 +144,15 @@ class SearchMusikki extends Component {
                     searchArtist = {this.searchArtist.bind(this)}
                     />
                   <hr />
-                   {this.state.results.map((item) =>
-                     <ListArtistsAndFavorites
-                       key={item.mkid}
-                       favorite={item}
-                       selectFavorite={this.selectFav.bind(this)} />)}
+                   {
+                     this.state.results.map((item) =>
+                      <ListArtistsAndFavorites
+                         key={item.mkid}
+                         favorite={item}
+                         selectFavorite={this.selectFav.bind(this)}
+                         className={ this.verifyFavorites(item) ? "icon fa fa-star search-favorite search-favorite-full" : "icon fa fa-star search-favorite search-favorite-empty"  } />
+                     )
+                   }
                     {this.state.searchOcurred ?
                     <div className="search-pagination">
                       <Pagination
@@ -142,7 +174,8 @@ class SearchMusikki extends Component {
                    <ListArtistsAndFavorites
                      key={item.mkid}
                      favorite={item}
-                     selectFavorite={this.selectFav.bind(this)} />)}
+                     selectFavorite={this.selectFav.bind(this)}
+                     className='icon fa fa-star search-favorite search-favorite-full' />)}
                   </TabPane>
               </TabContent>
             </Col>
@@ -152,6 +185,10 @@ class SearchMusikki extends Component {
       </div>
     );
   }
+}
+
+SearchMusikki.contextTypes = {
+	router: React.PropTypes.object
 }
 
 export default SearchMusikki;

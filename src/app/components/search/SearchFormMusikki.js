@@ -11,6 +11,12 @@ class SearchFormMusikki extends Component {
 		super(props);
 	}
 
+  handleKeyPress(target) {
+    if(target.charCode==13){
+      this.props.searchArtist();
+    }
+  }
+
   render() {
     return (
       <Row className="clearfix">
@@ -21,6 +27,7 @@ class SearchFormMusikki extends Component {
           value={this.props.artistN}
           placeholder="Search"
           onChange={this.props.changeArtist}
+          onKeyPress={this.handleKeyPress.bind(this)}
            />
         </FormGroup>
         </Col>

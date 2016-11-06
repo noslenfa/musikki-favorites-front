@@ -8,6 +8,9 @@ class ListFavoritesMusikki extends Component {
     this.props = props;
   }
 
+  componentWillMount(){
+  }
+
   render() {
     return (
       <div key={this.props.favorite.mkid} className="search-display-info">
@@ -18,7 +21,7 @@ class ListFavoritesMusikki extends Component {
           <div><span>NAME: </span>{this.props.favorite.name}</div>
           <div><span>TYPE: </span>{this.props.favorite.type}</div>
           </Col>
-        <Col xs={2}><div className="icon fa fa-star search-favorite search-favorite-empty" onClick={() => this.props.selectFavorite(this.props.favorite.mkid)}></div></Col>
+        <Col xs={2}><div className={this.props.className} onClick={() => this.props.selectFavorite(this.props.favorite.mkid)}></div></Col>
       </div>
     );
   }
