@@ -8,6 +8,7 @@ import HomeMusikki from './HomeMusikki';
 import LoginMusikki from './LoginMusikki';
 import RegisterMusikki from './RegisterMusikki';
 import SearchMusikki from './SearchMusikki';
+import NotFoundMusikki from './NotFoundMusikki';
 
 class App extends Component {
   render() {
@@ -20,7 +21,7 @@ class App extends Component {
                 <Route path={"login"} component={LoginMusikki} />
                 <Route path={"register"} component={RegisterMusikki} />
                 <Route path={"search"} component={SearchMusikki} />
-                <Route path='*' component={HomeMusikki} />
+                <Route path='*' component={NotFoundMusikki} />
             </Route>
         </Router>
     );

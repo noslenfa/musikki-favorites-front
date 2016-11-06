@@ -54,14 +54,12 @@ class SearchMusikki extends Component {
   }
 
   searchArtist(){
-    console.log('search');
     if (this.state.activePage === undefined) {
       this.state.activePage = 1;
     }
     this.state.searchOcurred = true;
     this.resultsService.getAllSearchedArtistsInfo(this.state.artistName, this.state.activePage,
       (response) => {
-        console.log(response);
         this.setState({ results: response.results });
         this.setState({ summary: response.summary });
       },
