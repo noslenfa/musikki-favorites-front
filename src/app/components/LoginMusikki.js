@@ -7,11 +7,12 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Button from 'react-bootstrap/lib/Button';
 import NavBarMusikki from './NavBarMusikki';
 import VideoMusikki from './VideoMusikki';
+import ValidationsMsgMusikki from './ValidationsMsgMusikki';
 
 class LoginMusikki extends Component {
   constructor(props, context){
 		super(props);
-    this.state = {usernameLValue: '', passwordLValue: ''};
+    this.state = {usernameLValue: '', passwordLValue: '', errorMessage: '', classMessage: ''};
     context.router;
 	}
 
@@ -24,6 +25,9 @@ class LoginMusikki extends Component {
   }
 
   loginUser() {
+    this.setState({errorMessage: ""});
+    this.setState({classMessage: ""});
+
     if (this.state.usernameLValue && this.state.passwordLValue) {
 
       let userLListAll = JSON.parse(localStorage.getItem('users'));
@@ -39,25 +43,24 @@ class LoginMusikki extends Component {
         });
         return usersfound.length > 0;
       }
-
+      let validationMessage = <div></div>;
       if(verifyUsernameExistence(this.state.usernameLValue)){
         if(userPass === this.state.passwordLValue) {
-          //TODO: implement logic to next steps
           console.log("authentication correct!!");
           localStorage.setItem('authenticatedUser', JSON.stringify(this.state.usernameLValue));
           localStorage.setItem('loggedIn', JSON.stringify(true));
           this.context.router.replace('search');
         } else {
-          //TODO: add information about user wrong authentication
-          console.log("authentication incorrect!!");
+          this.setState({errorMessage: "Incorrect Authentication! Please try again."});
+          this.setState({classMessage: "error-message"});
         }
       } else {
-        //TODO: add information about user !existence
-        console.log('user doesnt exist!')
+        this.setState({errorMessage: "User unknown. Please register first."});
+        this.setState({classMessage: "error-message"});
       }
     } else {
-      //TODO: inform to fill both inputs
-      console.log("please fill both inputs")
+      this.setState({errorMessage: "Please fill both fields (Username and Password)"});
+      this.setState({classMessage: "error-message"});
     }
   }
 
@@ -75,6 +78,7 @@ class LoginMusikki extends Component {
         <div className="container login-area">
           <div className="overlay-video"></div>
           <VideoMusikki videoURL={videoURLLogin}/>
+          <ValidationsMsgMusikki errorMsg={this.state.errorMessage} classMsg={this.state.classMessage}/>
           <form>
             <FormGroup
               controlId="login-username"

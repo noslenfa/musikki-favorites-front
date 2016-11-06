@@ -1,0 +1,13 @@
+.error-message, .sucess-message {
+  text-align: center;
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+.error-message {
+  color: $error-message;
+}
+
+.sucess-message {
+  color: $sucess-message;
+}

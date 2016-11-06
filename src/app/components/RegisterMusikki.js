@@ -7,6 +7,7 @@ import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Button from 'react-bootstrap/lib/Button';
 import VideoMusikki from './VideoMusikki';
 import NavBarMusikki from './NavBarMusikki';
+import ValidationsMsgMusikki from './ValidationsMsgMusikki';
 
 class RegisterMusikki extends Component {
   constructor(props){
@@ -23,6 +24,9 @@ class RegisterMusikki extends Component {
   }
 
   registerUser() {
+    this.setState({errorMessage: ""});
+    this.setState({classMessage: ""});
+
     if (this.state.usernameRValue && this.state.passwordRValue) {
 
       let userRListAll = JSON.parse(localStorage.getItem("users"));
@@ -37,9 +41,11 @@ class RegisterMusikki extends Component {
           return usersfound.length > 0;
       }
 
+      this.setState({errorMessage: "Congratulations! You are registered now."});
+      this.setState({classMessage: "sucess-message"});
       if(verifyUsernameExistence(this.state.usernameRValue)){
-        //TODO: add information about user existence
-        console.log('user already exist!')
+        this.setState({errorMessage: "That user already exist! Please choose other username."});
+        this.setState({classMessage: "error-message"});
       } else {
         userRListAll.push({username: this.state.usernameRValue, password: this.state.passwordRValue, favorites: this.state.favorites});
         this.state.usernameRValue = "";
@@ -48,8 +54,8 @@ class RegisterMusikki extends Component {
         this.setState({ userRList: userRListAll });
       }
     } else {
-      //TODO: inform to fill both inputs
-      console.log("please fill both inputs")
+      this.setState({errorMessage: "Please fill both fields (Username and Password)"});
+      this.setState({classMessage: "error-message"});
     }
   }
 
@@ -67,6 +73,7 @@ class RegisterMusikki extends Component {
         <div className="container login-area">
           <div className="overlay-video"></div>
           <VideoMusikki videoURL={videoURLRegister}/>
+          <ValidationsMsgMusikki errorMsg={this.state.errorMessage} classMsg={this.state.classMessage}/>
           <form>
             <FormGroup
               controlId="login-username"

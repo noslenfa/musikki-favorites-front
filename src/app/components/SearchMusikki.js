@@ -36,6 +36,7 @@ class SearchMusikki extends Component {
   componentWillMount() {
     if(!JSON.parse(localStorage.getItem("loggedIn"))) {
       this.context.router.replace('login');
+      return;
     }
 
     this.state.allUsers = JSON.parse(localStorage.getItem("users"));
@@ -77,19 +78,15 @@ class SearchMusikki extends Component {
 
   selectFav(item) {
     if (_.includes(this.getUserFavorites(this.state.authenticatedUser), item)) {
-
       _.pull(this.getUserFavorites(this.state.authenticatedUser), item);
-
       this.setState({ allUsers: this.state.allUsers });
       this.setState({
         favoritesList: this.state.favoritesList.filter((elm, i) => elm.mkid !== item)
       });
-
       localStorage.setItem('users', JSON.stringify(this.state.allUsers));
     } else {
       this.getInfoArtist(item);
       this.getUserFavorites(this.state.authenticatedUser).push(item);
-
       this.setState({ allUsers: this.state.allUsers });
       localStorage.setItem('users', JSON.stringify(this.state.allUsers));
     }
@@ -104,7 +101,7 @@ class SearchMusikki extends Component {
           image: response.result.image,
           type: response.result.type
         };
-        // does not modify the state is like create a new one
+        // does not modify the state, is like if it creates a new one
         this.setState({ favoritesList: this.state.favoritesList.concat([element])});
       },
       (err) => {
@@ -170,6 +167,7 @@ class SearchMusikki extends Component {
                     <div></div>}
                 </TabPane>
                 <TabPane eventKey="second">
+                  <hr />
                   {this.state.favoritesList.map((item) =>
                    <ListArtistsAndFavorites
                      key={item.mkid}

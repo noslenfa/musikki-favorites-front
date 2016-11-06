@@ -8,14 +8,18 @@ import NavbarCollapse from 'react-bootstrap/lib/NavbarCollapse';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
+import {logoUrl} from '../constants/Constants';
 
 class NavBarMusikki extends Component {
   constructor(props){
 		super(props);
 	}
 
+  updatedLoggedIn() {
+    localStorage.setItem('loggedIn', JSON.stringify(false));
+  }
+
   render() {
-    const logoUrl = './app/images/musikki.svg'
     return (
       <div>
         <Navbar fluid collapseOnSelect className="navbar-musikki">
@@ -38,7 +42,7 @@ class NavBarMusikki extends Component {
             <Nav pullRight>
               <NavItem>Welcome {this.props.username}</NavItem>
               <LinkContainer to="/">
-                <NavItem>LOGOUT</NavItem>
+                <NavItem onClick={this.updatedLoggedIn.bind(this)}>LOGOUT</NavItem>
               </LinkContainer>
             </Nav> }
           </NavbarCollapse>
