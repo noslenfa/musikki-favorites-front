@@ -1,14 +1,29 @@
 import React, { Component } from "react";
-import NavBarMusikki from "./NavBarMusikki";
-import CarouselMusikki from "./CarouselMusikki";
-import FooterMusikki from "./FooterMusikki";
+
+import HeaderMusikki from "./common/HeaderMusikki";
+import FooterMusikki from "./common/FooterMusikki";
+import CarouselMusikki from "./others/CarouselMusikki";
 
 class HomeMusikki extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      authenticatedUser: ""
+   };
+  }
+
+  //get username if there's info about user is loggedIn in localStorage
+  componentWillMount() {
+      if(JSON.parse(localStorage.getItem("loggedIn"))) {
+        this.setState({authenticatedUser: JSON.parse(localStorage.getItem("authenticatedUser"))});
+      }
+  }
 
   render() {
     return (
       <div>
-        <NavBarMusikki />
+        <HeaderMusikki loggedIn={JSON.parse(localStorage.getItem("loggedIn"))} username={this.state.authenticatedUser}/>
         <CarouselMusikki />
         <FooterMusikki />
       </div>

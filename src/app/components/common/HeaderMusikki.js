@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+
 import Nav from "react-bootstrap/lib/Nav";
 import Navbar from "react-bootstrap/lib/Navbar";
 import NavbarHeader from "react-bootstrap/lib/NavbarHeader";
@@ -7,14 +8,17 @@ import NavbarToggle from "react-bootstrap/lib/NavbarToggle";
 import NavbarCollapse from "react-bootstrap/lib/NavbarCollapse";
 import NavItem from "react-bootstrap/lib/NavItem";
 import MenuItem from "react-bootstrap/lib/MenuItem";
-import LinkContainer from "react-router-bootstrap/lib/LinkContainer";
-import {logoUrl} from "../constants/Constants";
 
-class NavBarMusikki extends Component {
+import LinkContainer from "react-router-bootstrap/lib/LinkContainer";
+
+import {logoUrl} from "../../constants/Constants";
+
+class HeaderMusikki extends Component {
   constructor(props){
 		super(props);
 	}
 
+  //when login out its storage the value of false to loggedIn info for other verification purposes
   updatedLoggedIn() {
     localStorage.setItem("loggedIn", JSON.stringify(false));
   }
@@ -25,11 +29,16 @@ class NavBarMusikki extends Component {
         <Navbar fluid collapseOnSelect className="navbar-musikki">
           <NavbarHeader>
             <NavbarBrand>
-              <a href="/"><img src={logoUrl}/></a>
+              <LinkContainer to="home">
+                <NavItem>
+                  <img src={logoUrl} />
+                </NavItem>
+              </LinkContainer>
             </NavbarBrand>
             <NavbarToggle />
           </NavbarHeader>
           <NavbarCollapse>
+            {/*user login verification*/}
             {!this.props.loggedIn ?
             <Nav pullRight>
               <LinkContainer to="register">
@@ -41,7 +50,7 @@ class NavBarMusikki extends Component {
             </Nav> :
             <Nav pullRight>
               <NavItem><strong>Welcome</strong> {this.props.username}</NavItem>
-              <LinkContainer to="/">
+              <LinkContainer to="/home">
                 <NavItem onClick={this.updatedLoggedIn.bind(this)}>LOGOUT<div className="icon fa fa-sign-out navbar-symbol"></div></NavItem>
               </LinkContainer>
             </Nav> }
@@ -52,4 +61,4 @@ class NavBarMusikki extends Component {
   }
 }
 
-export default NavBarMusikki;
+export default HeaderMusikki;

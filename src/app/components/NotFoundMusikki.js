@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import NavBarMusikki from "./NavBarMusikki"
-import VideoMusikki from "./VideoMusikki"
-import FooterMusikki from "./FooterMusikki"
+
+import HeaderMusikki from "./common/HeaderMusikki"
+import FooterMusikki from "./common/FooterMusikki"
+import VideoMusikki from "./others/VideoMusikki"
 
 
 class NotFoundMusikki extends Component {
@@ -9,21 +10,23 @@ class NotFoundMusikki extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticatedUser: "",
-      loggedIn: JSON.parse(localStorage.getItem("loggedIn"))
+      authenticatedUser: ""
    };
   }
 
+  //get username if there's info about user is loggedIn in localStorage
   componentWillMount() {
-      this.setState({authenticatedUser: JSON.parse(localStorage.getItem("authenticatedUser"))});
-      this.setState({loggedIn: JSON.parse(localStorage.getItem("loggedIn"))});
+      if(JSON.parse(localStorage.getItem("loggedIn"))) {
+        console.log("entrou");
+        this.setState({authenticatedUser: JSON.parse(localStorage.getItem("authenticatedUser"))});
+      }
   }
 
   render() {
     const videoURLLogin = "../app/videos/video_01_720p.mp4";
     return (
       <div>
-          <NavBarMusikki loggedIn={this.state.loggedIn} username={this.state.authenticatedUser}/>
+          <HeaderMusikki loggedIn={JSON.parse(localStorage.getItem("loggedIn"))} username={this.state.authenticatedUser}/>
           <VideoMusikki videoURL={videoURLLogin}/>
           <div className="notfound-404">404</div>
           <div className="notfound-page">PAGE NOT FOUND</div>

@@ -1,19 +1,26 @@
 import React, { Component } from "react";
+
 import FormGroup from "react-bootstrap/lib/FormGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
 import FormControl from "react-bootstrap/lib/FormControl";
 import FormControlFeedback from "react-bootstrap/lib/FormControlFeedback";
 import HelpBlock from "react-bootstrap/lib/HelpBlock";
 import Button from "react-bootstrap/lib/Button";
-import NavBarMusikki from "./NavBarMusikki";
-import VideoMusikki from "./VideoMusikki";
-import ValidationsMsgMusikki from "./ValidationsMsgMusikki";
-import FooterMusikki from "./FooterMusikki";
+
+import HeaderMusikki from "./common/HeaderMusikki";
+import FooterMusikki from "./common/FooterMusikki";
+import VideoMusikki from "./others/VideoMusikki";
+import ValidationsMsgMusikki from "./others/ValidationsMsgMusikki";
 
 class LoginMusikki extends Component {
   constructor(props, context){
 		super(props);
-    this.state = {usernameLValue: "", passwordLValue: "", errorMessage: "", classMessage: ""};
+    this.state = {
+      usernameLValue: "",
+      passwordLValue: "",
+      errorMessage: "",
+      classMessage: ""
+    };
     context.router;
 	}
 
@@ -26,14 +33,17 @@ class LoginMusikki extends Component {
   }
 
   loginUser() {
+    //set the errorMessage and classMessage to an empty string.
+    //this way the last error won't appear in case everything is correct
     this.setState({errorMessage: ""});
     this.setState({classMessage: ""});
 
+    //user and password verification
     if (this.state.usernameLValue && this.state.passwordLValue) {
-
+      //retrieve users list from localStorage
       let userLListAll = JSON.parse(localStorage.getItem("users"));
       let userPass;
-
+      //user verification based on name entered and users existent in localStorage
       const verifyUsernameExistence = function (username) {
         userLListAll = JSON.parse(localStorage.getItem("users"));
         let usersfound = userLListAll.filter(function(elm){
@@ -44,10 +54,13 @@ class LoginMusikki extends Component {
         });
         return usersfound.length > 0;
       }
+
+      //empty div in case there's no error
       let validationMessage = <div></div>;
+
+      //validations existent for verifications based on username or fields filled
       if(verifyUsernameExistence(this.state.usernameLValue)){
         if(userPass === this.state.passwordLValue) {
-          console.log("authentication correct!!");
           localStorage.setItem("authenticatedUser", JSON.stringify(this.state.usernameLValue));
           localStorage.setItem("loggedIn", JSON.stringify(true));
           this.context.router.replace("search");
@@ -65,6 +78,7 @@ class LoginMusikki extends Component {
     }
   }
 
+  //because react doesn't detect input Enter we must detect by its charCode
   handleKeyPress(target) {
     if(target.charCode==13){
       this.loginUser();
@@ -75,7 +89,7 @@ class LoginMusikki extends Component {
     const videoURLLogin = "../app/videos/video_03_720p.mp4";
     return (
       <div>
-        <NavBarMusikki />
+        <HeaderMusikki />
         <div className="container login-area">
           <div className="overlay-video"></div>
           <VideoMusikki videoURL={videoURLLogin}/>
@@ -116,6 +130,7 @@ class LoginMusikki extends Component {
   }
 }
 
+//needed for routing purposes
 LoginMusikki.contextTypes = {
 	router: React.PropTypes.object
 }

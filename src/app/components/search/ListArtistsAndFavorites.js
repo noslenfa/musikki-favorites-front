@@ -1,11 +1,11 @@
 import React, {Component} from "react";
+
 import Col from "react-bootstrap/lib/Col";
 
 class ListFavoritesMusikki extends Component {
 
   constructor(props) {
     super(props);
-    this.props = props;
   }
 
   render() {
