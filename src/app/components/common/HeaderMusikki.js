@@ -50,6 +50,9 @@ class HeaderMusikki extends Component {
             </Nav> :
             <Nav pullRight>
               <NavItem><strong>Welcome</strong> {this.props.username}</NavItem>
+              <LinkContainer to="/search">
+                <NavItem><div className="icon fa fa-search navbar-symbol"></div></NavItem>
+              </LinkContainer>
               <LinkContainer to="/home">
                 <NavItem onClick={this.updatedLoggedIn.bind(this)}>LOGOUT<div className="icon fa fa-sign-out navbar-symbol"></div></NavItem>
               </LinkContainer>

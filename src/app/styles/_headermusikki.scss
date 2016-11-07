@@ -14,10 +14,21 @@
     padding: 0;
     margin-top: -10px;
   }
-
 }
 
 .navbar-symbol {
   padding-left: 10px;
   font-size: 16px;
+}
+
+.navbar-default .navbar-nav {
+  .active a {
+      background-color: transparent;
+    &:focus {
+      background-color: transparent;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+  }
 }
