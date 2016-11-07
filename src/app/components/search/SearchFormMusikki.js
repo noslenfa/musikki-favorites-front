@@ -35,7 +35,7 @@ class SearchFormMusikki extends Component {
         </Col>
         <Col className="search-artist-btn" xs={4}>
           <Button bsStyle="primary" onClick={() => this.props.searchArtist()}>
-            SEARCH ARTISTS
+            <span>SEARCH ARTISTS</span>
             <div className="icon fa fa-search"></div>
           </Button>
         </Col>

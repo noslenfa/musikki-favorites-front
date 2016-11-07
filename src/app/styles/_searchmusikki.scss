@@ -121,3 +121,44 @@
 #left-tabs-example {
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .search-display-info {
+    height: 65px;
+    div:first-child {
+      padding-top: 5px;
+      img {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        border: 1px solid black;
+      }
+  	}
+  }
+
+  .search-display-info-text {
+    margin-top: 5px;
+    div:first-child {
+      font-size: 14px;
+      height: 16px;
+    }
+  }
+
+  .search-favorite {
+  	padding: 0;
+  	margin-top: 5px;
+  	margin-left: -10px;
+  	font-size: 45px;
+  }
+
+  .search-artist-btn {
+      button {
+        span {
+          display: none;
+        }
+        div {
+          padding-left: 0;
+        }
+      }
+  }
+}
