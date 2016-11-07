@@ -23,14 +23,14 @@ Accessing register view you can create an account based on an username and a pas
 ### Login
 Accessing login view you can login to an existing account inserting your username and password, there are some validations related to the inputs inserted.
 
-![alt text](/../master/src/screenshots/screenshot_00.png?raw=true "Login")
+![alt text](/../master/src/screenshots/screenshot_02.png?raw=true "Login")
 
 ### Search
 You can only access this view after being logged in, otherwise you are going to be redirected to login view. When logged in with success you can search for your favorite artists and add/remove them as favorites by clicking the star on it.
 
-![alt text](/../master/src/screenshots/screenshot_00.png?raw=true "Search")
+![alt text](/../master/src/screenshots/screenshot_03.png?raw=true "Search")
 
-![alt text](/../master/src/screenshots/screenshot_00.png?raw=true "Favorites")
+![alt text](/../master/src/screenshots/screenshot_04.png?raw=true "Favorites")
 
 ### Other Notes
 Whenever you enter a wrong url you are redirected to an 404 page.
