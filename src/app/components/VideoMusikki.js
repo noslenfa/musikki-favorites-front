@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
 class VideoMusikki extends Component {
+
     constructor (props) {
         super(props);
     }

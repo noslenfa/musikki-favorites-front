@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import FormControlFeedback from 'react-bootstrap/lib/FormControlFeedback';
-import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import Button from 'react-bootstrap/lib/Button';
-import NavBarMusikki from './NavBarMusikki';
-import VideoMusikki from './VideoMusikki';
-import ValidationsMsgMusikki from './ValidationsMsgMusikki';
-import FooterMusikki from './FooterMusikki';
+import React, { Component } from "react";
+import FormGroup from "react-bootstrap/lib/FormGroup";
+import ControlLabel from "react-bootstrap/lib/ControlLabel";
+import FormControl from "react-bootstrap/lib/FormControl";
+import FormControlFeedback from "react-bootstrap/lib/FormControlFeedback";
+import HelpBlock from "react-bootstrap/lib/HelpBlock";
+import Button from "react-bootstrap/lib/Button";
+import NavBarMusikki from "./NavBarMusikki";
+import VideoMusikki from "./VideoMusikki";
+import ValidationsMsgMusikki from "./ValidationsMsgMusikki";
+import FooterMusikki from "./FooterMusikki";
 
 class LoginMusikki extends Component {
   constructor(props, context){
 		super(props);
-    this.state = {usernameLValue: '', passwordLValue: '', errorMessage: '', classMessage: ''};
+    this.state = {usernameLValue: "", passwordLValue: "", errorMessage: "", classMessage: ""};
     context.router;
 	}
 
@@ -31,11 +31,11 @@ class LoginMusikki extends Component {
 
     if (this.state.usernameLValue && this.state.passwordLValue) {
 
-      let userLListAll = JSON.parse(localStorage.getItem('users'));
+      let userLListAll = JSON.parse(localStorage.getItem("users"));
       let userPass;
 
       const verifyUsernameExistence = function (username) {
-        userLListAll = JSON.parse(localStorage.getItem('users'));
+        userLListAll = JSON.parse(localStorage.getItem("users"));
         let usersfound = userLListAll.filter(function(elm){
           if (elm.username === username) {
             userPass = elm.password;
@@ -48,9 +48,9 @@ class LoginMusikki extends Component {
       if(verifyUsernameExistence(this.state.usernameLValue)){
         if(userPass === this.state.passwordLValue) {
           console.log("authentication correct!!");
-          localStorage.setItem('authenticatedUser', JSON.stringify(this.state.usernameLValue));
-          localStorage.setItem('loggedIn', JSON.stringify(true));
-          this.context.router.replace('search');
+          localStorage.setItem("authenticatedUser", JSON.stringify(this.state.usernameLValue));
+          localStorage.setItem("loggedIn", JSON.stringify(true));
+          this.context.router.replace("search");
         } else {
           this.setState({errorMessage: "Incorrect Authentication! Please try again."});
           this.setState({classMessage: "error-message"});
@@ -72,7 +72,7 @@ class LoginMusikki extends Component {
   }
 
   render() {
-    const videoURLLogin = '../app/videos/video_03_720p.mp4';
+    const videoURLLogin = "../app/videos/video_03_720p.mp4";
     return (
       <div>
         <NavBarMusikki />

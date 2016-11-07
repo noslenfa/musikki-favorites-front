@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import FormControlFeedback from 'react-bootstrap/lib/FormControlFeedback';
-import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import Button from 'react-bootstrap/lib/Button';
-import VideoMusikki from './VideoMusikki';
-import NavBarMusikki from './NavBarMusikki';
-import ValidationsMsgMusikki from './ValidationsMsgMusikki';
-import FooterMusikki from './FooterMusikki';
+import React, { Component } from "react";
+import FormGroup from "react-bootstrap/lib/FormGroup";
+import ControlLabel from "react-bootstrap/lib/ControlLabel";
+import FormControl from "react-bootstrap/lib/FormControl";
+import FormControlFeedback from "react-bootstrap/lib/FormControlFeedback";
+import HelpBlock from "react-bootstrap/lib/HelpBlock";
+import Button from "react-bootstrap/lib/Button";
+import VideoMusikki from "./VideoMusikki";
+import NavBarMusikki from "./NavBarMusikki";
+import ValidationsMsgMusikki from "./ValidationsMsgMusikki";
+import FooterMusikki from "./FooterMusikki";
 
 class RegisterMusikki extends Component {
   constructor(props){
 		super(props);
-    this.state = {usernameRValue: '', passwordRValue: '', favorites: [], userRList: []};
+    this.state = {usernameRValue: "", passwordRValue: "", favorites: [], userRList: []};
 	}
 
   handleChangeRUsername(e) {
@@ -51,7 +51,7 @@ class RegisterMusikki extends Component {
         userRListAll.push({username: this.state.usernameRValue, password: this.state.passwordRValue, favorites: this.state.favorites});
         this.state.usernameRValue = "";
         this.state.passwordRValue = "";
-        localStorage.setItem('users', JSON.stringify(userRListAll));
+        localStorage.setItem("users", JSON.stringify(userRListAll));
         this.setState({ userRList: userRListAll });
       }
     } else {
@@ -67,7 +67,7 @@ class RegisterMusikki extends Component {
   }
 
   render() {
-    const videoURLRegister = '../app/videos/video_02_720p.mp4';
+    const videoURLRegister = "../app/videos/video_02_720p.mp4";
     return (
       <div>
         <NavBarMusikki />

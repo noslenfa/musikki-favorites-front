@@ -1,24 +1,24 @@
-import React, {Component} from 'react';
-import Tabs from 'react-bootstrap/lib/Tabs';
-import Tab from 'react-bootstrap/lib/Tab';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import TabContainer from 'react-bootstrap/lib/TabContainer';
-import TabPane from 'react-bootstrap/lib/TabPane';
-import TabContent from 'react-bootstrap/lib/TabContent';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
-import Button from 'react-bootstrap/lib/Button';
-import Pagination from 'react-bootstrap/lib/Pagination';
-import ResultsService from '../services/ResultsService'
-import NavBarMusikki from './NavBarMusikki'
-import TabsSearchFavoritesMusikki from './search/TabsSearchFavoritesMusikki'
-import ListArtistsAndFavorites from './search/ListArtistsAndFavorites'
-import SearchFormMusikki from './search/SearchFormMusikki'
-import FooterMusikki from './FooterMusikki';
-import VideoMusikki from './VideoMusikki';
+import React, {Component} from "react";
+import Tabs from "react-bootstrap/lib/Tabs";
+import Tab from "react-bootstrap/lib/Tab";
+import FormGroup from "react-bootstrap/lib/FormGroup";
+import FormControl from "react-bootstrap/lib/FormControl";
+import TabContainer from "react-bootstrap/lib/TabContainer";
+import TabPane from "react-bootstrap/lib/TabPane";
+import TabContent from "react-bootstrap/lib/TabContent";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
+import Nav from "react-bootstrap/lib/Nav";
+import NavItem from "react-bootstrap/lib/NavItem";
+import Button from "react-bootstrap/lib/Button";
+import Pagination from "react-bootstrap/lib/Pagination";
+import ResultsService from "../services/ResultsService"
+import NavBarMusikki from "./NavBarMusikki"
+import TabsSearchFavoritesMusikki from "./search/TabsSearchFavoritesMusikki"
+import ListArtistsAndFavorites from "./search/ListArtistsAndFavorites"
+import SearchFormMusikki from "./search/SearchFormMusikki"
+import FooterMusikki from "./FooterMusikki";
+import VideoMusikki from "./VideoMusikki";
 
 
 class SearchMusikki extends Component {
@@ -26,11 +26,11 @@ class SearchMusikki extends Component {
 		super(props);
     this.resultsService = new ResultsService();
     this.state = {
-      artistName: '',
+      artistName: "",
       results: [],
       summary: [],
       searchOcurred: false,
-      authenticatedUser: '',
+      authenticatedUser: "",
       favoritesList: [],
       allUsers: []
     };
@@ -38,7 +38,7 @@ class SearchMusikki extends Component {
 
   componentWillMount() {
     if(!JSON.parse(localStorage.getItem("loggedIn"))) {
-      this.context.router.replace('login');
+      this.context.router.replace("login");
       return;
     }
 
@@ -84,12 +84,12 @@ class SearchMusikki extends Component {
       this.setState({
         favoritesList: this.state.favoritesList.filter((elm, i) => elm.mkid !== item)
       });
-      localStorage.setItem('users', JSON.stringify(this.state.allUsers));
+      localStorage.setItem("users", JSON.stringify(this.state.allUsers));
     } else {
       this.getInfoArtist(item);
       this.getUserFavorites(this.state.authenticatedUser).push(item);
       this.setState({ allUsers: this.state.allUsers });
-      localStorage.setItem('users', JSON.stringify(this.state.allUsers));
+      localStorage.setItem("users", JSON.stringify(this.state.allUsers));
     }
   }
 
@@ -112,7 +112,7 @@ class SearchMusikki extends Component {
   }
 
   getUser(username){
-    return _.find(this.state.allUsers, {'username': username});
+    return _.find(this.state.allUsers, {"username": username});
   }
 
   getUserFavorites(username){
@@ -127,7 +127,7 @@ class SearchMusikki extends Component {
   }
 
   render() {
-    const videoURLLogin = '../app/videos/video_04_720p.mp4';
+    const videoURLLogin = "../app/videos/video_04_720p.mp4";
     return (
       <div><NavBarMusikki loggedIn={true} username={this.state.authenticatedUser}/>
       <div className="container search-area">
@@ -183,7 +183,7 @@ class SearchMusikki extends Component {
                      key={item.mkid}
                      favorite={item}
                      selectFavorite={this.selectFav.bind(this)}
-                     className='icon fa fa-star search-favorite search-favorite-full' />)}
+                     className="icon fa fa-star search-favorite search-favorite-full" />)}
                   </TabPane>
               </TabContent>
             </Col>

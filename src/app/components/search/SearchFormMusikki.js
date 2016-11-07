@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Button from 'react-bootstrap/lib/Button';
+import React, {Component} from "react";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
+import FormGroup from "react-bootstrap/lib/FormGroup";
+import FormControl from "react-bootstrap/lib/FormControl";
+import Button from "react-bootstrap/lib/Button";
 
 class SearchFormMusikki extends Component {
 
@@ -12,6 +12,7 @@ class SearchFormMusikki extends Component {
 	}
 
   handleKeyPress(target) {
+    //because react doesn't detect input enter we must detect by its charCode
     if(target.charCode==13){
       this.props.searchArtist();
     }

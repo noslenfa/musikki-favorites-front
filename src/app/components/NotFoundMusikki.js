@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import NavBarMusikki from './NavBarMusikki'
-import VideoMusikki from './VideoMusikki'
-import FooterMusikki from './FooterMusikki'
+import React, {Component} from "react";
+import NavBarMusikki from "./NavBarMusikki"
+import VideoMusikki from "./VideoMusikki"
+import FooterMusikki from "./FooterMusikki"
 
 
 class NotFoundMusikki extends Component {
@@ -17,11 +17,10 @@ class NotFoundMusikki extends Component {
   componentWillMount() {
       this.setState({authenticatedUser: JSON.parse(localStorage.getItem("authenticatedUser"))});
       this.setState({loggedIn: JSON.parse(localStorage.getItem("loggedIn"))});
-      console.log(this.state);
   }
 
   render() {
-    const videoURLLogin = '../app/videos/video_01_720p.mp4';
+    const videoURLLogin = "../app/videos/video_01_720p.mp4";
     return (
       <div>
           <NavBarMusikki loggedIn={this.state.loggedIn} username={this.state.authenticatedUser}/>

@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
 class ValidationsMsgMusikki extends Component {
+
   constructor(props){
 		super(props);
 	}
