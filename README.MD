@@ -13,27 +13,27 @@ This app is divided in four main parts as described bellow.
 ### Home
 Here you can find a carousel with some images and information related with the app.
 
-![alt tag](https://github.com/noslenfa/musikki-favorites-front/tree/master/screenshots/screenshot_01.png)
+![alt text](/../master/src/screenshots/screenshot_00.png?raw=true "Home")
 
 ### Register
 Accessing register view you can create an account based on an username and a password with some validations related to the inputs inserted.
 
-![alt tag](https://github.com/noslenfa/musikki-favorites-front/tree/master/screenshots/screenshot_01.png)
+![alt text](/../master/src/screenshots/screenshot_01.png?raw=true "Register")
 
 ### Login
 Accessing login view you can login to an existing account inserting your username and password, there are some validations related to the inputs inserted.
 
-![alt tag](https://github.com/noslenfa/musikki-favorites-front/tree/master/screenshots/screenshot_02.png)
+![alt text](/../master/src/screenshots/screenshot_00.png?raw=true "Login")
 
 ### Search
 You can only access this view after being logged in, otherwise you are going to be redirected to login view. When logged in with success you can search for your favorite artists and add/remove them as favorites by clicking the star on it.
 
-![alt tag](https://github.com/noslenfa/musikki-favorites-front/tree/master/screenshots/screenshot_03.png)
+![alt text](/../master/src/screenshots/screenshot_00.png?raw=true "Search")
 
-![alt tag](https://github.com/noslenfa/musikki-favorites-front/tree/master/screenshots/screenshot_04.png)
+![alt text](/../master/src/screenshots/screenshot_00.png?raw=true "Favorites")
 
 ### Other Notes
 Whenever you enter a wrong url you are redirected to an 404 page.
 
 ## License
-[MIT](LICENSE)
+[MIT](/../master/LICENSE)
