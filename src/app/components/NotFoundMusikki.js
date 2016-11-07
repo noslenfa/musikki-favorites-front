@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavBarMusikki from './NavBarMusikki'
 import VideoMusikki from './VideoMusikki'
+import FooterMusikki from './FooterMusikki'
 
 
 class NotFoundMusikki extends Component {
@@ -27,6 +28,7 @@ class NotFoundMusikki extends Component {
           <VideoMusikki videoURL={videoURLLogin}/>
           <div className="notfound-404">404</div>
           <div className="notfound-page">PAGE NOT FOUND</div>
+          <FooterMusikki />
       </div>
     );
   }

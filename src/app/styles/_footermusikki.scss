@@ -1,0 +1,15 @@
+//footer scss file
+
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  background-color: $musikki-grey;
+  width: 100%;
+}
+
+.footer-text {
+  text-align: center;
+  height: 52px;
+  line-height: 52px;
+  font-size: 11px;
+}

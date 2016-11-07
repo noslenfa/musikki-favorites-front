@@ -9,9 +9,8 @@ class CarouselMusikki extends Component {
 	}
   render() {
     const carouselInfo = [
-      {id: 0, imgCarouselUrl: './app/images/carousel_00.jpg', slideLabel: 'MUSIKKI', slideText: 'You can MUSIKKI even with a piano keyboard!'},
-      {id: 1, imgCarouselUrl: './app/images/carousel_01.jpg', slideLabel: 'MUSIKKI', slideText: 'MUSIKKI master all your levels!'},
-      {id: 2, imgCarouselUrl: './app/images/carousel_02.jpg', slideLabel: 'MUSIKKI', slideText: 'Just try MUSIKKI with your guitar!'}
+      {id: 1, imgCarouselUrl: './app/images/carousel_01.png', slideLabel: 'SEARCH', slideText: 'Make some searches for your favorite artists!'},
+      {id: 2, imgCarouselUrl: './app/images/carousel_02.png', slideLabel: 'FAVORITES', slideText: 'Check your favorite artists!'}
     ];
     const carouselList = carouselInfo.map((item) =>
           <CarouselItem key={item.id}>

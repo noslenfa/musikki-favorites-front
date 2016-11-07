@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/lib/Button';
 import NavBarMusikki from './NavBarMusikki';
 import VideoMusikki from './VideoMusikki';
 import ValidationsMsgMusikki from './ValidationsMsgMusikki';
+import FooterMusikki from './FooterMusikki';
 
 class LoginMusikki extends Component {
   constructor(props, context){
@@ -71,7 +72,7 @@ class LoginMusikki extends Component {
   }
 
   render() {
-    const videoURLLogin = '../app/videos/video_01_720p.mp4';
+    const videoURLLogin = '../app/videos/video_03_720p.mp4';
     return (
       <div>
         <NavBarMusikki />
@@ -109,6 +110,7 @@ class LoginMusikki extends Component {
             </div>
           </form>
         </div>
+        <FooterMusikki />
       </div>
   );
   }

@@ -25,7 +25,7 @@ class NavBarMusikki extends Component {
         <Navbar fluid collapseOnSelect className="navbar-musikki">
           <NavbarHeader>
             <NavbarBrand>
-              <a href="#"><img src={logoUrl}/></a>
+              <a href="/"><img src={logoUrl}/></a>
             </NavbarBrand>
             <NavbarToggle />
           </NavbarHeader>
@@ -33,16 +33,16 @@ class NavBarMusikki extends Component {
             {!this.props.loggedIn ?
             <Nav pullRight>
               <LinkContainer to="register">
-                <NavItem>REGISTER</NavItem>
+                <NavItem>REGISTER<div className="icon fa fa-pencil-square-o navbar-symbol"></div></NavItem>
               </LinkContainer>
               <LinkContainer to="login">
-                <NavItem>LOGIN</NavItem>
+                <NavItem>LOGIN<div className="icon fa fa-sign-in navbar-symbol"></div></NavItem>
               </LinkContainer>
             </Nav> :
             <Nav pullRight>
-              <NavItem>Welcome {this.props.username}</NavItem>
+              <NavItem><strong>Welcome</strong> {this.props.username}</NavItem>
               <LinkContainer to="/">
-                <NavItem onClick={this.updatedLoggedIn.bind(this)}>LOGOUT</NavItem>
+                <NavItem onClick={this.updatedLoggedIn.bind(this)}>LOGOUT<div className="icon fa fa-sign-out navbar-symbol"></div></NavItem>
               </LinkContainer>
             </Nav> }
           </NavbarCollapse>

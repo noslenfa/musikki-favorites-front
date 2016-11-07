@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/lib/Button';
 import VideoMusikki from './VideoMusikki';
 import NavBarMusikki from './NavBarMusikki';
 import ValidationsMsgMusikki from './ValidationsMsgMusikki';
+import FooterMusikki from './FooterMusikki';
 
 class RegisterMusikki extends Component {
   constructor(props){
@@ -102,6 +103,7 @@ class RegisterMusikki extends Component {
             </div>
           </form>
         </div>
+        <FooterMusikki />
       </div>
     );
   }

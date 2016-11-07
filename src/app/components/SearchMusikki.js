@@ -17,6 +17,9 @@ import NavBarMusikki from './NavBarMusikki'
 import TabsSearchFavoritesMusikki from './search/TabsSearchFavoritesMusikki'
 import ListArtistsAndFavorites from './search/ListArtistsAndFavorites'
 import SearchFormMusikki from './search/SearchFormMusikki'
+import FooterMusikki from './FooterMusikki';
+import VideoMusikki from './VideoMusikki';
+
 
 class SearchMusikki extends Component {
   constructor(props){
@@ -124,9 +127,12 @@ class SearchMusikki extends Component {
   }
 
   render() {
+    const videoURLLogin = '../app/videos/video_04_720p.mp4';
     return (
       <div><NavBarMusikki loggedIn={true} username={this.state.authenticatedUser}/>
       <div className="container search-area">
+        <div className="overlay-video"></div>
+        <VideoMusikki videoURL={videoURLLogin}/>
         <TabContainer id="left-tabs-example" defaultActiveKey="first">
           <Row className="clearfix">
             <TabsSearchFavoritesMusikki />
@@ -139,6 +145,9 @@ class SearchMusikki extends Component {
                     searchArtist = {this.searchArtist.bind(this)}
                     />
                   <hr />
+                  {!this.state.searchOcurred ?
+                  <div className="search-info">PLEASE USE THE SEARCH BOX TO FIND SOME ARTISTS!</div> :
+                  <div></div>}
                    {
                      this.state.results.map((item) =>
                       <ListArtistsAndFavorites
@@ -166,6 +175,9 @@ class SearchMusikki extends Component {
                 </TabPane>
                 <TabPane eventKey="second">
                   <hr />
+                  {!this.state.favoritesList.length > 0 ?
+                  <div className="search-info">YOU CAN ADD OR REMOVE YOUR FAVORITES ARTISTS AFTER SEARCH BY CLICKING THE STAR!</div> :
+                  <div></div>}
                   {this.state.favoritesList.map((item) =>
                    <ListArtistsAndFavorites
                      key={item.mkid}
@@ -178,6 +190,7 @@ class SearchMusikki extends Component {
           </Row>
         </TabContainer>
       </div>
+      <FooterMusikki />
       </div>
     );
   }
