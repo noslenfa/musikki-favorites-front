@@ -36,6 +36,8 @@ You can only access this view after being logged in, otherwise you are going to 
 
 ### Other Notes
 Whenever you enter a wrong url you are redirected to an 404 page.
+This webapp is prepared to mobile devices.
+Hope you enjoy it :)
 
 ## License
 [MIT](/../master/LICENSE.MD)
