@@ -3,7 +3,8 @@
 This is a webapp created in [React] for exercise purposes only, where you can search for artists and and make them your favorites, accessing them later based on your browser localStorage information related to your user. To start using it just follow the [Local Setup](#local-setup) steps.
 
 ## Local Setup
-- We assume that you have already `node` installed, otherwise follow [installation process](https://nodejs.org/);
+- First git clone this project `git clone https://github.com/noslenfa/musikki-favorites-front.git`
+- Then we assume that you have already `node` installed, otherwise follow [installation process](https://nodejs.org/);
 - Install all the dependencies with `sudo npm install` (based on `package.json`);
 - Enter the webapp folder and start the App by running `npm start`;
 
