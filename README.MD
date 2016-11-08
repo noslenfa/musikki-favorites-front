@@ -8,6 +8,7 @@ This is a webapp created in [React] for exercise purposes only, where you can se
 - Then we assume that you have already `node` installed, otherwise follow [installation process](https://nodejs.org/);
 - Install all the dependencies with `sudo npm install` (based on `package.json`);
 - Enter the webapp folder and start the App by running `npm start`;
+- App should open your browser and start automatically. If not access it via: `http://localhost:3000/`
 
 ## App Information
 This app is divided in four main parts as described bellow.
