@@ -4,3 +4,49 @@
   width: 100%;
   height: auto;
 }
+
+.carousel-caption {
+  margin-bottom: 23%;
+	h3 {
+	font-size: 50px;
+	}
+	p {
+	font-size: 20px;
+	}
+}
+
+.carousel-indicators {
+  margin-bottom: 20%;
+  li {
+    height: 16px;
+    width: 16px;
+    &.active {
+      height: 18px;
+      width: 18px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-caption {
+    margin-bottom: 5%;
+  	h3 {
+  	font-size: 30px;
+  	}
+  	p {
+  	font-size: 16px;
+  	}
+  }
+
+  .carousel-indicators {
+    margin-bottom: 3%;
+    li {
+      height: 12px;
+      width: 12px;
+      &.active {
+        height: 14px;
+        width: 14px;
+      }
+    }
+  }
+}

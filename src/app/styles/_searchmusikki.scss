@@ -139,8 +139,16 @@
   .search-display-info-text {
     margin-top: 5px;
     div:first-child {
+      padding-top: 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      line-height: 0px;
       font-size: 14px;
       height: 16px;
+    }
+    div:last-child {
+      padding-top: 5px;
     }
   }
 
