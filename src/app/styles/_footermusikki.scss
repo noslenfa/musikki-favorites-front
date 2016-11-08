@@ -14,4 +14,12 @@
   height: 52px;
   line-height: 52px;
   font-size: 11px;
+  a {
+    color: black;
+    font-weight: bold;
+    &:hover {
+      color: $favorite-full;
+      text-decoration: none;
+    }
+  }
 }

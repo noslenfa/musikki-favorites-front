@@ -5,7 +5,7 @@ class FooterMusikki extends Component {
     return (
         <div className="container footer-container">
             <div className="row footer-text">
-                Copyright © 2016, <strong>MUSIKKI</strong>, All rights reserved.
+                Copyright © 2016, <a href="https://www.musikki.com/">MUSIKKI</a>, All rights reserved.
             </div>
         </div>
     )
